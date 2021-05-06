@@ -3,6 +3,10 @@ from pytesseract import Output
 from PIL import Image
 import cv2
 
+class classifier(object):
+    def __init__(self):
+        self.model = None
+
 def preprocess():
     img = cv2.imread('image4.JPG')
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
