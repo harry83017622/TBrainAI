@@ -1,0 +1,14 @@
+certifi==2020.12.5
+flatbuffers==1.12
+grpcio==1.32.0
+jmespath==0.10.0
+numpy==1.19.5
+opencv-python==4.5.1.48
+Pillow==8.2.0
+pytesseract==0.3.7
+python-dateutil==2.8.1
+s3transfer==0.4.2
+six==1.15.0
+typing-extensions==3.7.4.3
+urllib3==1.26.4
+wincertstore==0.2
