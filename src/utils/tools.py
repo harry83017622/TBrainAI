@@ -1,12 +1,30 @@
 import pytesseract
-from pytesseract import Output
-from PIL import Image
-import cv2
+# from pytesseract import Output
+# from PIL import Image
+# import cv2
 
-class classifier(object):
-    def __init__(self):
-        self.model = None
+class tesseractModel(object):
+    def __init__(self, os_sys='linux'):
+        self.load_system(os_sys)
+        self.img_preprocessing()
 
+    def load_system(self,os_sys):
+        if os_sys=='windows':
+            # To Do
+            # path need to be up-date
+            pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+        else:
+            pass
+    
+    def img_preprocessing(self):
+        # To Do
+        pass
+
+    def predict(self,img):
+        text = pytesseract.image_to_string(img, lang='chi_tra')
+        return text
+
+'''
 def preprocess():
     img = cv2.imread('image4.JPG')
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -45,3 +63,4 @@ if __name__ == "__main__":
     # preprocess()
     img, dict_d = main()
     plot_detect(img, dict_d)
+'''

@@ -8,7 +8,9 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 import numpy as np
-# from utils.tools import inference_entry_point
+from utils.tools import tesseractModel
+
+model = tesseractModel()
 
 app = Flask(__name__)
 
@@ -57,8 +59,8 @@ def predict(image):
     """
 
     ####### PUT YOUR MODEL INFERENCING CODE HERE #######
-    prediction = '陳'
-
+    # prediction = '陳'
+    prediction = model.predict(image)
 
     ####################################################
     if _check_datatype_to_string(prediction):
