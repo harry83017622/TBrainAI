@@ -60,7 +60,8 @@ def predict(image):
 
     ####### PUT YOUR MODEL INFERENCING CODE HERE #######
     # prediction = '陳'
-    prediction = model.predict(image)
+    img_process = model.img_preprocessing_(image)
+    prediction = model.predict_(img_process)
 
     ####################################################
     if _check_datatype_to_string(prediction):
