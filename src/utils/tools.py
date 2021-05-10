@@ -24,7 +24,7 @@ class tesseractModel(object):
         # 5. This is how tesseract preferred to recognize the word.
         ## Note: Somehow tesseract only recognize a series of word, instead of a single word. So I add a concat step.
         img = cv2.hconcat([img, img])
-        img_process = cv2.copyMakeBorder(img, 300, 300, 300, 300, cv2.BORDER_CONSTANT, value=[255,255,255])
+        img_process = cv2.copyMakeBorder(img, 100, 100, 100, 100, cv2.BORDER_CONSTANT, value=[255,255,255])
         img_process = cv2.resize(img_process, (500, 500), interpolation=cv2.INTER_AREA)
         return img_process
 

@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 if __name__ == '__main__':
-    img = cv2.imread('data/image/wo.jpg')
+    img = cv2.imread('data/image/ni.jpg')
     img = np.array(img)
     img = img[:,:,::-1]
     # print('hello')
