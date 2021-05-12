@@ -65,11 +65,7 @@ bash script/inference-client.sh "35.194.172.36:8080" "data/image/wo.jpg"
 ## Connect to GCP
 ssh -i ~/.ssh/id_gmail pittwu@35.194.172.36
 
-## Start services
-nohup python3 api.py &  
-ctrl + c  
-jobs -l  
+## Deploy TBrainAI service on to GCE
+1. In your mac / linux, go to parent directory of TBrainAI
+2. Execute command: bash TBrainAI/script/deploy.sh
 
-## Stop services
-ps aux | grep python3  
-kill -9 $our_service_process_id
