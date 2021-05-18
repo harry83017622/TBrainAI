@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import base64
 import datetime
+import time
 import hashlib
 
 import cv2
@@ -14,10 +15,10 @@ model = tesseractModel()
 
 app = Flask(__name__)
 
-####### PUT YOUR INFORMATION HERE #######
-CAPTAIN_EMAIL = 'my@gmail.com'          #
-SALT = 'my_salt'                        #
-#########################################
+####### PUT YOUR INFORMATION HERE #####################
+CAPTAIN_EMAIL = 'bgrhythm@yahoo.com.tw'               #
+SALT = 'my_salt_4e5d9829-c533-49ca-93d9-1ccab209721f' #
+#######################################################
 
 
 def generate_server_uuid(input_string):
@@ -106,7 +107,7 @@ def inference():
     except Exception as e:
         # You can write some log...
         raise e
-    server_timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    server_timestamp = round(time.time())
 
     return jsonify({'esun_uuid': data['esun_uuid'],
                     'server_uuid': server_uuid,
