@@ -3,17 +3,24 @@ import base64
 import datetime
 import time
 import hashlib
+from pathlib import Path
 
 import cv2
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask_executor import Executor
 import numpy as np
+import utils.imagestore as imagestore
 from utils.tools import tesseractModel
 
 model = tesseractModel()
 
 app = Flask(__name__)
+app.config['EXECUTOR_TYPE'] = 'thread'
+app.config['EXECUTOR_MAX_WORKERS'] = 10
+executor = Executor(app)
+request_img_output_dir = None
 
 ####### PUT YOUR INFORMATION HERE #####################
 CAPTAIN_EMAIL = 'bgrhythm@yahoo.com.tw'               #
@@ -49,6 +56,8 @@ def base64_to_binary_for_cv2(image_64_encoded):
     image = cv2.imdecode(np.frombuffer(img_binary, np.uint8), cv2.IMREAD_COLOR)
     return image
 
+def asnyc_base64_to_image_file(outputDir, image_64_encoded):
+    executor.submit(imagestore.base64_to_image_file, outputDir, image_64_encoded)
 
 def predict(image):
     """ Predict your model result.
@@ -93,6 +102,7 @@ def inference():
 
     # 取 image(base64 encoded) 並轉成 cv2 可用格式
     image_64_encoded = data['image']
+    asnyc_base64_to_image_file(request_img_output_dir, image_64_encoded) # save image file
     image = base64_to_binary_for_cv2(image_64_encoded)
 
     t = datetime.datetime.now()
@@ -121,6 +131,11 @@ if __name__ == "__main__":
     )
     arg_parser.add_argument('-p', '--port', default=8080, help='port')
     arg_parser.add_argument('-d', '--debug', default=True, help='debug')
+    arg_parser.add_argument('-i', '--dirOfRequestImage', default="/home/pittwu/req-images", help='directory of request image to save')
     options = arg_parser.parse_args()
+
+    request_img_output_dir = options.dirOfRequestImage.rstrip("/")
+    Path(request_img_output_dir).mkdir(parents=True, exist_ok=True)
+    print(f'request image output directory: {request_img_output_dir}')
 
     app.run(debug=options.debug, port=options.port, host='0.0.0.0')
