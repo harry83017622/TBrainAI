@@ -52,20 +52,45 @@ Check out https://pypi.org/project/pytesseract/
 * Image Processing
 * Test baseline model performance
 
-  
+## Machine Information with GPU
+* OS : Debian 10 buster
+* GPU : Tesla K80 (GeForce 400)
+* CPU : 4
+* Memory : 15 G
+* Tensorflow : 2.4
+* Cuda : 11.2
+* IP: 35.201.197.216
+
+# GPU Information
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.73.01    Driver Version: 460.73.01    CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla K80           Off  | 00000000:00:04.0 Off |                    0 |
+| N/A   33C    P8    26W / 149W |      3MiB / 11441MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
 
 ## Test command
 ---
 #### by curl command
 curl -X POST -H "content-type: application/json" --data "@data/json/test1.json" "http://35.194.172.36:8080/inference"
+curl -X POST -H "content-type: application/json" --data "@data/json/test1.json" "http://35.201.197.216:8080/inference"
 
 #### by inference-client.sh
 bash script/inference-client.sh "35.194.172.36:8080" "data/image/wo.jpg"
+bash script/inference-client.sh "35.201.197.216:8080" "data/image/wo.jpg"
 
 ## Connect to GCP
 ssh -i ~/.ssh/id_gmail pittwu@35.194.172.36
+ssh -i ~/.ssh/id_tbrain tbrain@35.201.197.216
 
 ## Deploy TBrainAI service on to GCE
 1. In your mac / linux, go to parent directory of TBrainAI
-2. Execute command: bash TBrainAI/script/deploy.sh
+2. Execute command:
+ bash TBrainAI/script/deploy.sh
+ bash TBrainAI/script/deploy.sh "~/.ssh/id_tbrain" "tbrain" "35.201.197.216"'
 

@@ -131,7 +131,7 @@ if __name__ == "__main__":
     )
     arg_parser.add_argument('-p', '--port', default=8080, help='port')
     arg_parser.add_argument('-d', '--debug', default=True, help='debug')
-    arg_parser.add_argument('-i', '--dirOfRequestImage', default="/home/pittwu/req-images", help='directory of request image to save')
+    arg_parser.add_argument('-i', '--dirOfRequestImage', default="/home/tbrain/req-images", help='directory of request image to save')
     options = arg_parser.parse_args()
 
     request_img_output_dir = options.dirOfRequestImage.rstrip("/")
