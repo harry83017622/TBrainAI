@@ -92,5 +92,5 @@ ssh -i ~/.ssh/id_tbrain tbrain@35.201.197.216
 1. In your mac / linux, go to parent directory of TBrainAI
 2. Execute command:
  bash TBrainAI/script/deploy.sh
- bash TBrainAI/script/deploy.sh "~/.ssh/id_tbrain" "tbrain" "35.201.197.216"'
+ bash TBrainAI/script/deploy.sh "~/.ssh/id_tbrain" "tbrain" "35.201.197.216"
 

@@ -17,6 +17,7 @@ from utils.tools import tesseractModel
 model = tesseractModel()
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 app.config['EXECUTOR_TYPE'] = 'thread'
 app.config['EXECUTOR_MAX_WORKERS'] = 10
 executor = Executor(app)
